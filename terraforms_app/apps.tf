@@ -1,7 +1,7 @@
 # Here, the provider block for AWS is defined
 provider "aws" {
-  access_key = "AKIAZYXPFPWSVDIFSDGG"
-  secret_key = "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"
+  access_key = ""
+  secret_key = ""
   region     = "us-east-1"
 }
 
