@@ -5,7 +5,7 @@ provider "aws" {
   region     = "us-east-1"
 }
 
-# Create a VPC
+# Creation of  VPC, Subnet, Route table for the EC2
 resource "aws_vpc" "app-tf-vpc" {
   cidr_block           = "10.0.0.0/16"
   instance_tenancy     = "default"
@@ -17,6 +17,8 @@ resource "aws_vpc" "app-tf-vpc" {
   }
 }
 
+
+#Internet gateway creation
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.app-tf-vpc.id
 
@@ -186,7 +188,7 @@ resource "aws_db_subnet_group" "sub-group" {
   ]
 }
 
-# Creating auto scaling group
+# Creation of auto scaling group
 resource "aws_launch_configuration" "web-app-config" {
   name_prefix     = "app-lc-"
   image_id        = "ami-053b0d53c279acc90"
@@ -197,9 +199,6 @@ resource "aws_launch_configuration" "web-app-config" {
     create_before_destroy = true
   }
 }
-
-
-
 
 resource "aws_autoscaling_group" "web-app-instance" {
   name                 = "app-asg"
